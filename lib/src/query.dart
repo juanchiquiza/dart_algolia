@@ -25,6 +25,8 @@ class AlgoliaQuery {
               'numericFilters':
                   List<List<String>>.unmodifiable(<List<String>>[]),
               'tagFilters': List<List<String>>.unmodifiable(<List<String>>[]),
+              'analyticsTags':
+                  List<List<String>>.unmodifiable(<List<String>>[]),
             }),
         assert(algolia != null),
         assert(index != null);
@@ -369,6 +371,16 @@ class AlgoliaQuery {
         'TagFilters $value already exists in this query');
     tagFilters.add(value);
     return _copyWithParameters(<String, dynamic>{'tagFilters': tagFilters});
+  }
+
+  AlgoliaQuery setAnalyticsTags(String value) {
+    final List<String> analyticsTags =
+        List<String>.from(_parameters['analyticsTags']);
+    assert(analyticsTags.where((String item) => value == item).isEmpty,
+        'AnalyticsTags $value already exists in this query');
+    analyticsTags.add(value);
+    return _copyWithParameters(
+        <String, dynamic>{'analyticsTags': analyticsTags});
   }
 
   ///
